@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class MainController {
 
@@ -49,6 +51,14 @@ public class MainController {
         userRepo.save(user);
 
         modelMap.put("user", userRepo.findAll());
+
+        return "index";
+    }
+
+    @GetMapping("/find")
+    public String findUserByName(@RequestParam String name, ModelMap modelMap){
+
+        modelMap.put("user", userRepo.fainUserByName(userRepo.findAll(), name));
 
         return "index";
     }
