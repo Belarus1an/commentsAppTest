@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Title</title>
+</head>
+
+<body>
+
+<div class="form-group w-25 px-5 py-3">
+    <form action="/add" method="post">
+        <div class="my-2"><input required  type="text" name="name" class="form-control" aria-describedby="emailHelp" placeholder="Enter name" /></div>
+        <div class="my-2"><input required type="text" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email"/></div>
+        <button type="submit" class="btn btn-primary">Dodaj</button>
+    </form>
+</div>
+
+<div  class="px-5">
+    <table class="table table-striped">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Comment</th>
+            <th scope="col">Add Comment</th>
+            <th scope="col">Delete</th>
+        </tr>
+        <tr scope="col" th:each ="user : ${user}">
+            <td th:text="${user.name}">...</td>
+            <td th:text="${user.email}">...</td>
+            <td th:text="${user.comment}">...</td>
+            <td>
+                <div class="input-group mb-3">
+                  <form method="post" th:action="@{'/edit/' + ${user.id}}" >
+                    <div class="input-group-prepend">
+                        <input type="text" name="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        <button type="submit" class="btn btn-primary" id="button-addon1">Ok</button>
+                    </div>
+                  </form>
+                </div>
+            </td>
+            <td>
+                <a th:href="@{'/delete/' + ${user.id}}">
+                    <img th:src="@{'/img/delete.png'}">
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
